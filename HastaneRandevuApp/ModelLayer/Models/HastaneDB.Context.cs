@@ -35,7 +35,7 @@ namespace ModelLayer.Models
         public virtual DbSet<Kullanici> Kullanici { get; set; }
         public virtual DbSet<KullaniciBilgileri> KullaniciBilgileri { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Randevu> Randevu { get; set; }
+        public virtual DbSet<HastaneBolum> HastaneBolum { get; set; }
     }
 }

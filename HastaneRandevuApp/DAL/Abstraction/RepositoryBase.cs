@@ -69,12 +69,18 @@ namespace DAL.Abstraction
             }
         }
 
-        public IEnumerable<TEntity> GetByFilter(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
             using (DBContext db = new DBContext())
             {
                 try {
-                    DbSet<TEntity> table = db.Set<TEntity>();
+
+
+                    IQueryable<TEntity> table = db.Set<TEntity>();
+                    foreach(var inc in includes)
+                    {
+                        table = table.Include(inc);
+                    }
                     return table.Where(predicate).ToList();
                 }
                 catch
@@ -84,15 +90,20 @@ namespace DAL.Abstraction
             }
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(int id, params Expression<Func<TEntity, object>>[] includes)
         {
             using (DBContext db = new DBContext())
             {
                 try
                 {
                     DbSet<TEntity> table = db.Set<TEntity>();
-                    var model = table.Find(id);
-                    return model;
+                    foreach (var inc in includes)
+                    {
+                        table.Include(inc);
+                        // burada sadece son değeri  include etmek gibi bir problem oluşabilir dikkat et!
+                    }
+                    
+                    return table.Find(id);
                 }
                 catch
                 {
@@ -118,20 +129,6 @@ namespace DAL.Abstraction
                 }
             }
         }
-        //public IEnumerable<TEntity> Include(DbSet<TEntity> dbSet)
-        //{
-        //    using (DBContext db = new DBContext())
-        //    {
-        //        //IDbSet<TEntity> dbSet = db.Set<TEntity>();
-
-        //        IEnumerable<TEntity> query = null;
-        //        foreach (var include in includes)
-        //        {
-        //            query = dbSet.Include(include);
-        //        }
-
-        //        return query ?? dbSet;
-        //    }
-        //}
+       
     }
 }

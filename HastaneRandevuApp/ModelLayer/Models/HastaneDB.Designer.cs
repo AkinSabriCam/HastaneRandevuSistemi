@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\HP\Desktop\HastaneRandevuApp\ModelLayer\Models\HastaneDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Akin\Documents\GitHub\HastaneRandevuSitemi\HastaneRandevuApp\ModelLayer\Models\HastaneDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

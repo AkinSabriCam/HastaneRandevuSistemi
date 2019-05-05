@@ -18,14 +18,15 @@ namespace ModelLayer.Models
         public Bolum()
         {
             this.Doktor = new HashSet<Doktor>();
+            this.HastaneBolum = new HashSet<HastaneBolum>();
         }
     
         public int bolumID { get; set; }
         public string bolumAdi { get; set; }
-        public Nullable<int> hastaneID { get; set; }
     
-        public virtual Hastane Hastane { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Doktor> Doktor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HastaneBolum> HastaneBolum { get; set; }
     }
 }

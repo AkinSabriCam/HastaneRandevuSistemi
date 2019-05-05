@@ -11,7 +11,6 @@
           </Key>
           <Property Name="bolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bolumAdi" Type="nvarchar" MaxLength="50" />
-          <Property Name="hastaneID" Type="int" />
         </EntityType>
         <EntityType Name="Doktor">
           <Key>
@@ -42,6 +41,14 @@
           <Property Name="ilID" Type="int" />
           <Property Name="ilceID" Type="int" />
           <Property Name="acikAdres" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HastaneBolum">
+          <Key>
+            <PropertyRef Name="hastaneBolumID" />
+          </Key>
+          <Property Name="hastaneBolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bolumID" Type="int" />
+          <Property Name="hastaneID" Type="int" />
         </EntityType>
         <EntityType Name="Il">
           <Key>
@@ -109,28 +116,6 @@
           <Property Name="rolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rolAdi" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <Association Name="FK_Bolum_Hastane">
-          <End Role="Hastane" Type="Self.Hastane" Multiplicity="0..1" />
-          <End Role="Bolum" Type="Self.Bolum" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Hastane">
-              <PropertyRef Name="hastaneID" />
-            </Principal>
-            <Dependent Role="Bolum">
-              <PropertyRef Name="hastaneID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Doktor_Bolum">
           <End Role="Bolum" Type="Self.Bolum" Multiplicity="0..1" />
           <End Role="Doktor" Type="Self.Doktor" Multiplicity="*" />
@@ -200,6 +185,30 @@
             </Principal>
             <Dependent Role="Hastane">
               <PropertyRef Name="ilceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneBolum_Bolum">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="0..1" />
+          <End Role="HastaneBolum" Type="Self.HastaneBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="HastaneBolum">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneBolum_Hastane">
+          <End Role="Hastane" Type="Self.Hastane" Multiplicity="0..1" />
+          <End Role="HastaneBolum" Type="Self.HastaneBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastane">
+              <PropertyRef Name="hastaneID" />
+            </Principal>
+            <Dependent Role="HastaneBolum">
+              <PropertyRef Name="hastaneID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -304,6 +313,7 @@
           <EntitySet Name="Doktor" EntityType="Self.Doktor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Favori" EntityType="Self.Favori" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hastane" EntityType="Self.Hastane" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HastaneBolum" EntityType="Self.HastaneBolum" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Il" EntityType="Self.Il" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ilce" EntityType="Self.Ilce" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Izin" EntityType="Self.Izin" Schema="dbo" store:Type="Tables" />
@@ -311,11 +321,6 @@
           <EntitySet Name="KullaniciBilgileri" EntityType="Self.KullaniciBilgileri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Randevu" EntityType="Self.Randevu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Bolum_Hastane" Association="Self.FK_Bolum_Hastane">
-            <End Role="Hastane" EntitySet="Hastane" />
-            <End Role="Bolum" EntitySet="Bolum" />
-          </AssociationSet>
           <AssociationSet Name="FK_Doktor_Bolum" Association="Self.FK_Doktor_Bolum">
             <End Role="Bolum" EntitySet="Bolum" />
             <End Role="Doktor" EntitySet="Doktor" />
@@ -339,6 +344,14 @@
           <AssociationSet Name="FK_Hastane_Ilce" Association="Self.FK_Hastane_Ilce">
             <End Role="Ilce" EntitySet="Ilce" />
             <End Role="Hastane" EntitySet="Hastane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneBolum_Bolum" Association="Self.FK_HastaneBolum_Bolum">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="HastaneBolum" EntitySet="HastaneBolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneBolum_Hastane" Association="Self.FK_HastaneBolum_Hastane">
+            <End Role="Hastane" EntitySet="Hastane" />
+            <End Role="HastaneBolum" EntitySet="HastaneBolum" />
           </AssociationSet>
           <AssociationSet Name="FK_Ilce_Il" Association="Self.FK_Ilce_Il">
             <End Role="Il" EntitySet="Il" />
@@ -383,9 +396,8 @@
           </Key>
           <Property Name="bolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="bolumAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hastaneID" Type="Int32" />
-          <NavigationProperty Name="Hastane" Relationship="Self.FK_Bolum_Hastane" FromRole="Bolum" ToRole="Hastane" />
           <NavigationProperty Name="Doktor" Relationship="Self.FK_Doktor_Bolum" FromRole="Bolum" ToRole="Doktor" />
+          <NavigationProperty Name="HastaneBolum" Relationship="HastaneRandevuSistemiModel.FK_HastaneBolum_Bolum" FromRole="Bolum" ToRole="HastaneBolum" />
         </EntityType>
         <EntityType Name="Doktor">
           <Key>
@@ -423,10 +435,10 @@
           <Property Name="ilID" Type="Int32" />
           <Property Name="ilceID" Type="Int32" />
           <Property Name="acikAdres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bolum" Relationship="Self.FK_Bolum_Hastane" FromRole="Hastane" ToRole="Bolum" />
           <NavigationProperty Name="Doktor" Relationship="Self.FK_Doktor_Hastane" FromRole="Hastane" ToRole="Doktor" />
           <NavigationProperty Name="Il" Relationship="Self.FK_Hastane_Il" FromRole="Hastane" ToRole="Il" />
           <NavigationProperty Name="Ilce" Relationship="Self.FK_Hastane_Ilce" FromRole="Hastane" ToRole="Ilce" />
+          <NavigationProperty Name="HastaneBolum" Relationship="HastaneRandevuSistemiModel.FK_HastaneBolum_Hastane" FromRole="Hastane" ToRole="HastaneBolum" />
         </EntityType>
         <EntityType Name="Il">
           <Key>
@@ -498,28 +510,6 @@
           <Property Name="rolAdi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Kullanici" Relationship="Self.FK_Kullanici_Rol" FromRole="Rol" ToRole="Kullanici" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_Bolum_Hastane">
-          <End Role="Hastane" Type="Self.Hastane" Multiplicity="0..1" />
-          <End Role="Bolum" Type="Self.Bolum" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Hastane">
-              <PropertyRef Name="hastaneID" />
-            </Principal>
-            <Dependent Role="Bolum">
-              <PropertyRef Name="hastaneID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Doktor_Bolum">
           <End Role="Bolum" Type="Self.Bolum" Multiplicity="0..1" />
           <End Role="Doktor" Type="Self.Doktor" Multiplicity="*" />
@@ -675,11 +665,6 @@
           <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
           <EntitySet Name="KullaniciBilgileri" EntityType="Self.KullaniciBilgileri" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_Bolum_Hastane" Association="Self.FK_Bolum_Hastane">
-            <End Role="Hastane" EntitySet="Hastane" />
-            <End Role="Bolum" EntitySet="Bolum" />
-          </AssociationSet>
           <AssociationSet Name="FK_Doktor_Bolum" Association="Self.FK_Doktor_Bolum">
             <End Role="Bolum" EntitySet="Bolum" />
             <End Role="Doktor" EntitySet="Doktor" />
@@ -737,6 +722,15 @@
             <End Role="Kullanici" EntitySet="Kullanici" />
             <End Role="Randevu" EntitySet="Randevu" />
           </AssociationSet>
+          <EntitySet Name="HastaneBolum" EntityType="HastaneRandevuSistemiModel.HastaneBolum" />
+          <AssociationSet Name="FK_HastaneBolum_Bolum" Association="HastaneRandevuSistemiModel.FK_HastaneBolum_Bolum">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="HastaneBolum" EntitySet="HastaneBolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HastaneBolum_Hastane" Association="HastaneRandevuSistemiModel.FK_HastaneBolum_Hastane">
+            <End Role="Hastane" EntitySet="Hastane" />
+            <End Role="HastaneBolum" EntitySet="HastaneBolum" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Randevu">
           <Key>
@@ -775,6 +769,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="HastaneBolum">
+          <Key>
+            <PropertyRef Name="hastaneBolumID" />
+          </Key>
+          <Property Name="hastaneBolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bolumID" Type="Int32" />
+          <Property Name="hastaneID" Type="Int32" />
+          <NavigationProperty Name="Bolum" Relationship="HastaneRandevuSistemiModel.FK_HastaneBolum_Bolum" FromRole="HastaneBolum" ToRole="Bolum" />
+          <NavigationProperty Name="Hastane" Relationship="HastaneRandevuSistemiModel.FK_HastaneBolum_Hastane" FromRole="HastaneBolum" ToRole="Hastane" />
+        </EntityType>
+        <Association Name="FK_HastaneBolum_Bolum">
+          <End Type="HastaneRandevuSistemiModel.Bolum" Role="Bolum" Multiplicity="0..1" />
+          <End Type="HastaneRandevuSistemiModel.HastaneBolum" Role="HastaneBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="HastaneBolum">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HastaneBolum_Hastane">
+          <End Type="HastaneRandevuSistemiModel.Hastane" Role="Hastane" Multiplicity="0..1" />
+          <End Type="HastaneRandevuSistemiModel.HastaneBolum" Role="HastaneBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastane">
+              <PropertyRef Name="hastaneID" />
+            </Principal>
+            <Dependent Role="HastaneBolum">
+              <PropertyRef Name="hastaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -786,7 +814,6 @@
               <MappingFragment StoreEntitySet="Bolum">
                 <ScalarProperty Name="bolumID" ColumnName="bolumID" />
                 <ScalarProperty Name="bolumAdi" ColumnName="bolumAdi" />
-                <ScalarProperty Name="hastaneID" ColumnName="hastaneID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -809,17 +836,6 @@
                 <ScalarProperty Name="favoriID" ColumnName="favoriID" />
                 <ScalarProperty Name="doktorID" ColumnName="doktorID" />
                 <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Hastane">
-            <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.Hastane">
-              <MappingFragment StoreEntitySet="Hastane">
-                <ScalarProperty Name="hastaneID" ColumnName="hastaneID" />
-                <ScalarProperty Name="hastaneAdi" ColumnName="hastaneAdi" />
-                <ScalarProperty Name="ilID" ColumnName="ilID" />
-                <ScalarProperty Name="ilceID" ColumnName="ilceID" />
-                <ScalarProperty Name="acikAdres" ColumnName="acikAdres" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -884,17 +900,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Randevu">
             <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.Randevu">
               <MappingFragment StoreEntitySet="Randevu">
@@ -904,6 +909,26 @@
                 <ScalarProperty Name="saat" ColumnName="saat" />
                 <ScalarProperty Name="tarih" ColumnName="tarih" />
                 <ScalarProperty Name="randevuID" ColumnName="randevuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HastaneBolum">
+            <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.HastaneBolum">
+              <MappingFragment StoreEntitySet="HastaneBolum">
+                <ScalarProperty Name="hastaneID" ColumnName="hastaneID" />
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+                <ScalarProperty Name="hastaneBolumID" ColumnName="hastaneBolumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hastane">
+            <EntityTypeMapping TypeName="IsTypeOf(HastaneRandevuSistemiModel.Hastane)">
+              <MappingFragment StoreEntitySet="Hastane">
+                <ScalarProperty Name="acikAdres" ColumnName="acikAdres" />
+                <ScalarProperty Name="ilceID" ColumnName="ilceID" />
+                <ScalarProperty Name="ilID" ColumnName="ilID" />
+                <ScalarProperty Name="hastaneAdi" ColumnName="hastaneAdi" />
+                <ScalarProperty Name="hastaneID" ColumnName="hastaneID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

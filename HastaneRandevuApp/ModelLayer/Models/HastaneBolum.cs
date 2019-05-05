@@ -12,12 +12,13 @@ namespace ModelLayer.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class HastaneBolum
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int hastaneBolumID { get; set; }
+        public Nullable<int> bolumID { get; set; }
+        public Nullable<int> hastaneID { get; set; }
+    
+        public virtual Bolum Bolum { get; set; }
+        public virtual Hastane Hastane { get; set; }
     }
 }

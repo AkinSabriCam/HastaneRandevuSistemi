@@ -16,16 +16,14 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = bolumRepo.Get(x => x.Doktor, x => x.Hastane);
+                    var model = bolumRepo.Get(x => x.Doktor, x => x.HastaneBolum);
                     var Bolumler = new List<BolumDTO>();
                     foreach (var ent in model.ToList())
                     {
                         var bolum = new BolumDTO();
                         bolum.bolumAdi = ent.bolumAdi;
                         bolum.bolumID = ent.bolumID;
-                        bolum.hastaneAdi = ent.Hastane.hastaneAdi;
-                        bolum.hastaneID = ent.hastaneID;
-
+                       
                         Bolumler.Add(bolum);
                     }
                     return Bolumler;
@@ -48,9 +46,7 @@ namespace BusinessLogicLayer.BLLs
                     var bolum = new BolumDTO();
                     bolum.bolumAdi = ent.bolumAdi;
                     bolum.bolumID = ent.bolumID;
-                    bolum.hastaneAdi = ent.Hastane.hastaneAdi;
-                    bolum.hastaneID = ent.hastaneID;
-
+                    
                     return bolum; 
                 }
                 catch
@@ -59,6 +55,9 @@ namespace BusinessLogicLayer.BLLs
                 }
 
             }
+        }
+        public void Delete (int id)
+        {
 
         }
         

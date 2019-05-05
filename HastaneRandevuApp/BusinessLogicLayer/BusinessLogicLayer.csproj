@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLLs\BolumBLL.cs" />
     <Compile Include="BLLs\HastaneBLL.cs" />
+    <Compile Include="BLLs\RandevuBLL.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

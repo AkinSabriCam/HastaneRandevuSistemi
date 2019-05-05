@@ -16,7 +16,7 @@ namespace BusinessLogicLayer.BLLs
             using (HastaneRepository hastaneRepo = new HastaneRepository())
             {
 
-                var model = hastaneRepo.Get(x => x.Bolum, x => x.Doktor, x => x.Il, x => x.Ilce).ToList();
+                var model = hastaneRepo.Get(x => x.HastaneBolum, x => x.Doktor, x => x.Il, x => x.Ilce).ToList();
                
                     var hastaneler = new List<HastaneDTO>();
                     foreach (var ent in model.ToList())

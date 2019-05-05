@@ -17,8 +17,8 @@ namespace ModelLayer.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hastane()
         {
-            this.Bolum = new HashSet<Bolum>();
             this.Doktor = new HashSet<Doktor>();
+            this.HastaneBolum = new HashSet<HastaneBolum>();
         }
     
         public int hastaneID { get; set; }
@@ -28,10 +28,10 @@ namespace ModelLayer.Models
         public string acikAdres { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bolum> Bolum { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Doktor> Doktor { get; set; }
         public virtual Il Il { get; set; }
         public virtual Ilce Ilce { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HastaneBolum> HastaneBolum { get; set; }
     }
 }

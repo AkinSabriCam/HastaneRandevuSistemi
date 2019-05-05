@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DTOs\BolumDTO.cs" />
     <Compile Include="DTOs\HastaneDTO.cs" />
     <Compile Include="DTOs\KullaniciDTO.cs" />
+    <Compile Include="DTOs\RandevuDTO.cs" />
     <Compile Include="Models\Bolum.cs">
       <DependentUpon>HastaneDB.tt</DependentUpon>
     </Compile>
@@ -64,6 +66,9 @@
       <DependentUpon>HastaneDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hastane.cs">
+      <DependentUpon>HastaneDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HastaneBolum.cs">
       <DependentUpon>HastaneDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HastaneDB.Context.cs">
@@ -100,9 +105,6 @@
       <DependentUpon>HastaneDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rol.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>HastaneDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
