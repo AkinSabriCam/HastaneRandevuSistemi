@@ -1,5 +1,7 @@
 ﻿using DAL.Concretes;
+using MappingLayer.Mappers;
 using ModelLayer.DTOs;
+using ModelLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,33 +12,16 @@ namespace BusinessLogicLayer.BLLs
 {
     public class RandevuBLL
     {
+        RandevuMapper randevuMapper = new RandevuMapper();
         public List<RandevuDTO> Get()
         {
             using (RandevuRepository randevuRepo = new RandevuRepository())
-            {
+            { 
+
                 try
                 {
-                    var model = randevuRepo.Get(x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
-                    var Randevular = new List<RandevuDTO>();
-                    foreach (var ent in model)
-                    {
-                        var randevu = new RandevuDTO();
-                        randevu.bolumAdi = ent.Doktor.Bolum.bolumAdi;
-                        randevu.doktorAdi = ent.Doktor.adi;
-                        randevu.doktorID = ent.doktorID;
-                        randevu.doktorSoyadi = ent.Doktor.soyadi;
-                        randevu.durum = ent.durum;
-                        randevu.HastaneAdi = ent.Doktor.Hastane.hastaneAdi;
-                        randevu.kullaniciAdi = ent.Kullanici.KullaniciBilgileri.adi;
-                        randevu.kullaniciID = ent.kullaniciID;
-                        randevu.kullaniciSoyadi = ent.Kullanici.KullaniciBilgileri.soyadi;
-                        randevu.randevuID = ent.randevuID;
-                        randevu.saat = ent.saat;
-                        randevu.tarih = ent.tarih;
-
-                        Randevular.Add(randevu);
-                    }
-                    return Randevular;
+                    var model = randevuRepo.Get(x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    return randevuMapper.MapAll(model);
                 }
                 catch
                 {
@@ -52,21 +37,8 @@ namespace BusinessLogicLayer.BLLs
                 try
                 {
                     var ent = randevuRepo.GetById(id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
-                    var randevu = new RandevuDTO();
-                    randevu.bolumAdi = ent.Doktor.Bolum.bolumAdi;
-                    randevu.doktorAdi = ent.Doktor.adi;
-                    randevu.doktorID = ent.doktorID;
-                    randevu.doktorSoyadi = ent.Doktor.soyadi;
-                    randevu.durum = ent.durum;
-                    randevu.HastaneAdi = ent.Doktor.Hastane.hastaneAdi;
-                    randevu.kullaniciAdi = ent.Kullanici.KullaniciBilgileri.adi;
-                    randevu.kullaniciID = ent.kullaniciID;
-                    randevu.kullaniciSoyadi = ent.Kullanici.KullaniciBilgileri.soyadi;
-                    randevu.randevuID = ent.randevuID;
-                    randevu.saat = ent.saat;
-                    randevu.tarih = ent.tarih;
 
-                    return randevu;
+                    return randevuMapper.Map(ent);
                 }
                 catch
                 {
@@ -83,29 +55,10 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.doktorID == id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
-                    var Randevular = new List<RandevuDTO>();
-                    foreach (var ent in model)
-                    {
-                        var randevu = new RandevuDTO();
-                        randevu.bolumAdi = ent.Doktor.Bolum.bolumAdi;
-                        randevu.doktorAdi = ent.Doktor.adi;
-                        randevu.doktorID = ent.doktorID;
-                        randevu.doktorSoyadi = ent.Doktor.soyadi;
-                        randevu.durum = ent.durum;
-                        randevu.HastaneAdi = ent.Doktor.Hastane.hastaneAdi;
-                        randevu.kullaniciAdi = ent.Kullanici.KullaniciBilgileri.adi;
-                        randevu.kullaniciID = ent.kullaniciID;
-                        randevu.kullaniciSoyadi = ent.Kullanici.KullaniciBilgileri.soyadi;
-                        randevu.randevuID = ent.randevuID;
-                        randevu.saat = ent.saat;
-                        randevu.tarih = ent.tarih;
+                    var model = randevuRepo.GetByFilter(x => x.doktorID == id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
-                        Randevular.Add(randevu);
-                    }
+                    return randevuMapper.MapAll(model);
 
-
-                    return Randevular;
                 }
                 catch
                 {
@@ -120,29 +73,10 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
-                    var Randevular = new List<RandevuDTO>();
-                    foreach (var ent in model)
-                    {
-                        var randevu = new RandevuDTO();
-                        randevu.bolumAdi = ent.Doktor.Bolum.bolumAdi;
-                        randevu.doktorAdi = ent.Doktor.adi;
-                        randevu.doktorID = ent.doktorID;
-                        randevu.doktorSoyadi = ent.Doktor.soyadi;
-                        randevu.durum = ent.durum;
-                        randevu.HastaneAdi = ent.Doktor.Hastane.hastaneAdi;
-                        randevu.kullaniciAdi = ent.Kullanici.KullaniciBilgileri.adi;
-                        randevu.kullaniciID = ent.kullaniciID;
-                        randevu.kullaniciSoyadi = ent.Kullanici.KullaniciBilgileri.soyadi;
-                        randevu.randevuID = ent.randevuID;
-                        randevu.saat = ent.saat;
-                        randevu.tarih = ent.tarih;
+                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
-                        Randevular.Add(randevu);
-                    }
-
-
-                    return Randevular;
+                   
+                    return randevuMapper.MapAll(model);
                 }
                 catch
                 {
@@ -150,5 +84,69 @@ namespace BusinessLogicLayer.BLLs
                 }
             }
         }
+
+        public List<RandevuDonusDTO> GetForUser(DateTime tarih,int doktorId)
+        {
+            using (RandevuRepository randevuRepo = new RandevuRepository())
+            {
+                try
+                {
+                    var model = randevuRepo.GetByFilter(x => x.doktorID == doktorId && x.tarih == tarih).ToList();
+                    if (model.Count < 19)
+                    {
+                        return randevuMapper.MapDonus(model);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public  void Delete (int randevuId)
+        {
+            using (RandevuRepository randevuRepo = new RandevuRepository())
+            {
+                try
+                {
+                    var model = randevuRepo.GetById(randevuId, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
+                    model.durum = false;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public void Add(int kullaniciId,int doktorId,DateTime tarih,TimeSpan saat)
+        {
+            using (RandevuRepository randevuRepo = new RandevuRepository())
+            {
+                try
+                {
+                    var randevu = new Randevu();
+
+                    randevu.doktorID = doktorId;
+                    randevu.kullaniciID = kullaniciId;
+                    randevu.durum = true;
+                    randevu.tarih = tarih;
+                    randevu.saat = saat;
+                    randevuRepo.Add(randevu);
+
+                }
+                catch
+                {
+                    throw;
+                }
+
+            }
+
+        }
+        
     }
 }

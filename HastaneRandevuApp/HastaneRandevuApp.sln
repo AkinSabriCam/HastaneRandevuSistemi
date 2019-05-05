@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{F3446DFC-E7A2-4B74-B0D7-5F87E8695544}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{6449AB86-4B4C-4468-A84A-1092B9292825}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{4C58D82F-CD6D-46FE-82F2-5BD7D1AEE676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MappingLayer", "MappingLayer\MappingLayer.csproj", "{926148A0-8117-477F-8467-72C4F3A85A81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{4C58D82F-CD6D-46FE-82F2-5BD7D1AEE676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C58D82F-CD6D-46FE-82F2-5BD7D1AEE676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C58D82F-CD6D-46FE-82F2-5BD7D1AEE676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926148A0-8117-477F-8467-72C4F3A85A81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926148A0-8117-477F-8467-72C4F3A85A81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926148A0-8117-477F-8467-72C4F3A85A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926148A0-8117-477F-8467-72C4F3A85A81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62B91F6D-17BF-49D1-B581-EA6D144A5C72}
 	EndGlobalSection
 EndGlobal

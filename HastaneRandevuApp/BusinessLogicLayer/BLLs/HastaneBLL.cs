@@ -1,4 +1,5 @@
 ﻿using DAL.Concretes;
+using MappingLayer.Mappers;
 using ModelLayer.DTOs;
 using ModelLayer.Models;
 using System;
@@ -11,28 +12,17 @@ namespace BusinessLogicLayer.BLLs
 {
     public class HastaneBLL
     {
+        HastaneMapper hastaneMapper = new HastaneMapper();
         public List<HastaneDTO> Get()
         {
             using (HastaneRepository hastaneRepo = new HastaneRepository())
             {
-
-                var model = hastaneRepo.Get(x => x.HastaneBolum, x => x.Doktor, x => x.Il, x => x.Ilce).ToList();
                
-                    var hastaneler = new List<HastaneDTO>();
-                    foreach (var ent in model.ToList())
-                    {
-                        var hastane = new HastaneDTO();
-                        hastane.acikAdres = ent.acikAdres;
-                        hastane.hastaneAdi = ent.hastaneAdi;
-                        hastane.hastaneID = ent.hastaneID;
-                        hastane.ilAdi = ent.Il.ilAdi;
-                        hastane.ilceAdi = ent.Ilce.ilceAdi;
-                        hastane.ilceID = ent.ilceID;
-                        hastane.ilID = ent.ilID;
+                
+                var model = hastaneRepo.Get(x => x.HastaneBolum, x => x.Doktor, x => x.Il, x => x.Ilce).ToList();
 
-                        hastaneler.Add(hastane);
-                    }
-                    return hastaneler;
+                return hastaneMapper.MapAll(model);
+                   
             }
         }
 
@@ -42,19 +32,10 @@ namespace BusinessLogicLayer.BLLs
             using(HastaneRepository hastaneRepo = new HastaneRepository())
             {
                 try
-                {
+                {  
                     var ent = hastaneRepo.GetById(id);
 
-                    var hastane = new HastaneDTO();
-                    hastane.acikAdres = ent.acikAdres;
-                    hastane.hastaneAdi = ent.hastaneAdi;
-                    hastane.hastaneID = ent.hastaneID;
-                    hastane.ilAdi = ent.Il.ilAdi;
-                    hastane.ilceAdi = ent.Ilce.ilceAdi;
-                    hastane.ilceID = ent.ilceID;
-                    hastane.ilID = ent.ilID;
-
-                    return hastane;
+                   return  hastaneMapper.Map(ent);
                 }
                 catch 
                 {
@@ -72,21 +53,7 @@ namespace BusinessLogicLayer.BLLs
                 {
                     var model = hastaneRepo.GetByFilter(x => x.ilceID == ilceId && x.ilID == ilId).ToList();
 
-                    var hastaneler = new List<HastaneDTO>();
-                    foreach (var ent in model.ToList())
-                    {
-                        var hastane = new HastaneDTO();
-                        hastane.acikAdres = ent.acikAdres;
-                        hastane.hastaneAdi = ent.hastaneAdi;
-                        hastane.hastaneID = ent.hastaneID;
-                        hastane.ilAdi = ent.Il.ilAdi;
-                        hastane.ilceAdi = ent.Ilce.ilceAdi;
-                        hastane.ilceID = ent.ilceID;
-                        hastane.ilID = ent.ilID;
-
-                        hastaneler.Add(hastane);
-                    }
-                    return hastaneler;
+                    return hastaneMapper.MapAll(model);
 
                 }
                 catch
@@ -129,7 +96,24 @@ namespace BusinessLogicLayer.BLLs
         }
         public void Delete (int id)
         {
+            using(HastaneRepository hastaneRepo = new HastaneRepository())
+            {
+                try
+                {
+                    var model = hastaneRepo.GetById(id, x => x.Doktor, x => x.HastaneBolum, x => x.Il, x => x.Ilce);
 
+                    HastaneBolumBLL hastanebolBusiness = new HastaneBolumBLL();
+                    hastanebolBusiness.DeleteByHastane(model.HastaneBolum.ToList());
+
+                    hastaneRepo.Delete(id);
+                }
+                catch
+                {
+                    throw;
+                }
+
+
+            }
         }
     }
 }

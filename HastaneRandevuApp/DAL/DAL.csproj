@@ -61,6 +61,7 @@
     <Compile Include="Concretes\BolumRepository.cs" />
     <Compile Include="Concretes\DoktorRepository.cs" />
     <Compile Include="Concretes\FavoriRepository.cs" />
+    <Compile Include="Concretes\HastaneBolumRepository.cs" />
     <Compile Include="Concretes\HastaneRepository.cs" />
     <Compile Include="Concretes\IzinRepository.cs" />
     <Compile Include="Concretes\KullaniciRepository.cs" />

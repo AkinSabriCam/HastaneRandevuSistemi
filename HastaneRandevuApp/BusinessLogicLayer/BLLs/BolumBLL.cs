@@ -1,5 +1,6 @@
 ﻿using DAL.Concretes;
 using ModelLayer.DTOs;
+using ModelLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,51 @@ namespace BusinessLogicLayer.BLLs
         }
         public void Delete (int id)
         {
+            using (BolumRepository bolumRepo = new BolumRepository())
+            {
+                try
+                {
+                    var bolum = bolumRepo.GetById(id, x => x.Doktor, x => x.HastaneBolum);
+
+                    HastaneBolumBLL hasbolBusiness = new HastaneBolumBLL();
+                    hasbolBusiness.DeleteByBolum(bolum.HastaneBolum.ToList());
+                }
+                catch
+                {
+                    throw;
+                }
+
+            }
+        }
+
+        public void Add(Bolum model)
+        {
+            using (BolumRepository bolumRepo = new BolumRepository())
+            {
+                try
+                {
+                    bolumRepo.Add(model);
+                }
+                catch
+                {
+                    throw;
+                }
+
+            }
+        }
+        public void Update(Bolum model)
+        {
+            using(BolumRepository bolumRepo = new BolumRepository())
+            {
+                try
+                {
+                    bolumRepo.Update(model);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
 
         }
         

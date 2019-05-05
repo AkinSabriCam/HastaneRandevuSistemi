@@ -53,8 +53,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DTOs\BolumDTO.cs" />
+    <Compile Include="DTOs\DoktorDTO.cs" />
+    <Compile Include="DTOs\HastaneBolumDTO.cs" />
     <Compile Include="DTOs\HastaneDTO.cs" />
     <Compile Include="DTOs\KullaniciDTO.cs" />
+    <Compile Include="DTOs\RandevuDonusDTO.cs" />
     <Compile Include="DTOs\RandevuDTO.cs" />
     <Compile Include="Models\Bolum.cs">
       <DependentUpon>HastaneDB.tt</DependentUpon>
