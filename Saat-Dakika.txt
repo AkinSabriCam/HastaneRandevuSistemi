@@ -1,0 +1,5 @@
+Saat-dakika
+
+string test ="08:00:00";
+TimeSpan ts = TimeSpan.Parse(test);
+Console.Write(ts.ToString(@"hh\:mm"));

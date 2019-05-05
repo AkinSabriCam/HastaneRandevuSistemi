@@ -1,2 +1,2 @@
-# HastaneRandevuSitemi
-Bu uygulama kullanıcıların istedikleri hastane veya bölümden hızlı ve kolayca randevu alabilmelerini sağlayan bir mobil uygulamadır.Back-end olarak N katmanlı mimari ve ASP.NET  Restful api kullanılmıştır Front-end ise react- native ile geliştirilmiştir
+# HastaneRandevuSistemi
+Hastaların hızlı bir şekilde randevu alabilmelerini sağlayan mobil uygulamadır. Kullanılan teknolojiler ASP.NET Restful Api ve React Native 
