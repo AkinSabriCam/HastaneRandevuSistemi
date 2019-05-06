@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ModelLayer">
+    <Reference Include="ModelLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ModelLayer\bin\Debug\ModelLayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -46,8 +47,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Mappers\DoktorMapper.cs" />
+    <Compile Include="Mappers\FavoriMapper.cs" />
     <Compile Include="Mappers\HastaneBolumMapper.cs" />
     <Compile Include="Mappers\HastaneMapper.cs" />
+    <Compile Include="Mappers\IzinMapper.cs" />
+    <Compile Include="Mappers\KullaniciMapper.cs" />
     <Compile Include="Mappers\RandevuMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

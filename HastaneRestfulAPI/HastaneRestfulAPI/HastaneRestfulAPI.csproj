@@ -44,7 +44,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BusinessLogicLayer">
+    <Reference Include="BusinessLogicLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\HastaneRandevuApp\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll</HintPath>
     </Reference>
     <Reference Include="DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -64,7 +65,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ModelLayer">
+    <Reference Include="ModelLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\HastaneRandevuApp\ModelLayer\bin\Debug\ModelLayer.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />

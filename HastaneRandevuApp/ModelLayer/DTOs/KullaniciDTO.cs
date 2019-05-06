@@ -18,5 +18,6 @@ namespace ModelLayer.DTOs
         public Nullable<int> ilceID { get; set; }
         public string ilceAdi { get; set; }
         public string acikAdres { get; set; }
+        public int rolID { get; set; }
     }
 }
