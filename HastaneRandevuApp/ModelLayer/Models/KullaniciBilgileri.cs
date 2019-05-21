@@ -22,6 +22,8 @@ namespace ModelLayer.Models
         public Nullable<int> ilID { get; set; }
         public Nullable<int> ilceID { get; set; }
         public string acikAdres { get; set; }
+        public string cepTelefonu { get; set; }
+        public string email { get; set; }
     
         public virtual Il Il { get; set; }
         public virtual Ilce Ilce { get; set; }

@@ -57,92 +57,91 @@
     <Compile Include="DTOs\FavoriDTO.cs" />
     <Compile Include="DTOs\HastaneBolumDTO.cs" />
     <Compile Include="DTOs\HastaneDTO.cs" />
+    <Compile Include="DTOs\IlceDTO.cs" />
+    <Compile Include="DTOs\IlDTO.cs" />
     <Compile Include="DTOs\IzinDTO.cs" />
     <Compile Include="DTOs\KullaniciDTO.cs" />
     <Compile Include="DTOs\RandevuDonusDTO.cs" />
     <Compile Include="DTOs\RandevuDTO.cs" />
     <Compile Include="Models\Bolum.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Doktor.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Favori.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hastane.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HastaneBolum.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HastaneDB.Context.cs">
+    <Compile Include="Models\HastaneEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HastaneDB.Context.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HastaneDB.cs">
+    <Compile Include="Models\HastaneEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HastaneDB.Designer.cs">
+    <Compile Include="Models\HastaneEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HastaneDB.edmx</DependentUpon>
+      <DependentUpon>HastaneEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Il.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ilce.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Izin.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Kullanici.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KullaniciBilgileri.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Randevu.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rol.cs">
-      <DependentUpon>HastaneDB.tt</DependentUpon>
+      <DependentUpon>HastaneEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\HastaneDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HastaneDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Models\HastaneDB.edmx.diagram">
-      <DependentUpon>HastaneDB.edmx</DependentUpon>
+    <EntityDeploy Include="Models\HastaneEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HastaneEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\HastaneEntities.edmx.diagram">
+      <DependentUpon>HastaneEntities.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\HastaneDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HastaneDB.edmx</DependentUpon>
-      <LastGenOutput>HastaneDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\HastaneDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HastaneDB.edmx</DependentUpon>
-      <LastGenOutput>HastaneDB.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Models\HastaneEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HastaneEntities.edmx</DependentUpon>
+      <LastGenOutput>HastaneEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\HastaneEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HastaneEntities.edmx</DependentUpon>
+      <LastGenOutput>HastaneEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

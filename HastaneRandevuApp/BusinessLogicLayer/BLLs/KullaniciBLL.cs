@@ -46,27 +46,80 @@ namespace BusinessLogicLayer.BLLs
                 }
             }
         }
-        public void Add(Kullanici model)
+        public void Add(KullaniciDTO model)
         {
             using (KullaniciRepository kullaniciRepo = new KullaniciRepository())
             {
                 try
                 {
-                    kullaniciRepo.Add(model);
-                }
+                    var kullanici = new Kullanici();
+                    kullanici.TCKN = model.TCKN;
+                    kullanici.kullanicID = model.kullaniID;
+                    kullanici.rolID = model.rolID;
+                    kullanici.sifre = model.sifre;
+                    kullaniciRepo.Add(kullanici);
+
+                    using (KullaniciBilgileriRepository kullaniciBilRepo = new KullaniciBilgileriRepository())
+                    {
+                        try
+                        {
+                            var kulBil = new KullaniciBilgileri();
+                            kulBil.acikAdres = model.acikAdres;
+                            kulBil.adi = model.adi;
+                            kulBil.cinsiyet = model.cinsiyet;
+                            kulBil.dogumTarihi = model.dogumTarihi;
+                            kulBil.ilceID = model.ilceID;
+                            kulBil.ilID = model.ilID;
+                            kulBil.kullaniID = kullanici.kullanicID;
+                            kulBil.soyadi = model.soyadi;
+                            kullaniciBilRepo.Add(kulBil);
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                    }
+                 }
                 catch
                 {
                     throw;
                 }
             }
         }
-        public void Update(Kullanici model)
+        public void Update(KullaniciDTO model)
         {
             using (KullaniciRepository kullaniciRepo = new KullaniciRepository())
             {
                 try
                 {
-                    kullaniciRepo.Update(model);
+                    var kullanici = new Kullanici();
+                    kullanici.TCKN = model.TCKN;
+                    kullanici.kullanicID = model.kullaniID;
+                    kullanici.rolID = model.rolID;
+                    kullanici.sifre = model.sifre;
+                    kullaniciRepo.Update(kullanici);
+
+                    using (KullaniciBilgileriRepository kullaniciBilRepo = new KullaniciBilgileriRepository())
+                    {
+                        try
+                        {
+                            var kulBil = new KullaniciBilgileri();
+                            kulBil.acikAdres = model.acikAdres;
+                            kulBil.adi = model.adi;
+                            kulBil.cinsiyet = model.cinsiyet;
+                            kulBil.dogumTarihi = model.dogumTarihi;
+                            kulBil.ilceID = model.ilceID;
+                            kulBil.ilID = model.ilID;
+                            kulBil.kullaniID = kullanici.kullanicID;
+                            kulBil.soyadi = model.soyadi;
+                            kullaniciBilRepo.Update(kulBil);
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                    }
+
                 }
                 catch
                 {
@@ -81,6 +134,18 @@ namespace BusinessLogicLayer.BLLs
                 try
                 {
                     kullaniciRepo.Delete(id);
+
+                    using(KullaniciBilgileriRepository kullaniciBilRepo = new KullaniciBilgileriRepository())
+                    {
+                        try
+                        {
+                            kullaniciBilRepo.Delete(id);
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                    }
                 }
                 catch
                 {

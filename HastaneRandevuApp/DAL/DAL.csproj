@@ -30,8 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CoreLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="CoreLayer">
       <HintPath>..\CoreLayer\bin\Debug\CoreLayer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -42,8 +41,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ModelLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ModelLayer">
       <HintPath>..\ModelLayer\bin\Debug\ModelLayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -65,7 +63,10 @@
     <Compile Include="Concretes\FavoriRepository.cs" />
     <Compile Include="Concretes\HastaneBolumRepository.cs" />
     <Compile Include="Concretes\HastaneRepository.cs" />
+    <Compile Include="Concretes\IlceRepository.cs" />
+    <Compile Include="Concretes\IlRepository.cs" />
     <Compile Include="Concretes\IzinRepository.cs" />
+    <Compile Include="Concretes\KullaniciBilgileriRepository.cs" />
     <Compile Include="Concretes\KullaniciRepository.cs" />
     <Compile Include="Concretes\RandevuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

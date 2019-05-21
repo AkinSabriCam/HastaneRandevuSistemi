@@ -84,8 +84,26 @@ namespace BusinessLogicLayer.BLLs
                 }
             }
         }
+        public List<RandevuDTO> GetOldByUserId(int id)
+        {
+            using (RandevuRepository randevuRepo = new RandevuRepository())
+            {
+                try
+                {
+                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == id && x.durum==false, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
-        public List<RandevuDonusDTO> GetForUser(DateTime tarih,int doktorId)
+
+                    return randevuMapper.MapAll(model);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+
+        public List<RandevuDTO> GetForUser(DateTime tarih,int doktorId)
         {
             using (RandevuRepository randevuRepo = new RandevuRepository())
             {
@@ -94,7 +112,9 @@ namespace BusinessLogicLayer.BLLs
                     var model = randevuRepo.GetByFilter(x => x.doktorID == doktorId && x.tarih == tarih).ToList();
                     if (model.Count < 19)
                     {
-                        return randevuMapper.MapDonus(model);
+                        // bu tarihteki ilgili doktorun tüm randevularını döndü 
+
+                        return randevuMapper.MapAll(model);
                     }
                     else
                     {

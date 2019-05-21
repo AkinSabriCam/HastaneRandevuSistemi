@@ -51,8 +51,9 @@ namespace DAL.Abstraction
         {
             using (DBContext db = new DBContext())
             {
+                
                 try
-                {
+                {   
                     IQueryable<TEntity> table = db.Set<TEntity>();
                     
                     foreach(Expression<Func<TEntity, object>> inc in includes)

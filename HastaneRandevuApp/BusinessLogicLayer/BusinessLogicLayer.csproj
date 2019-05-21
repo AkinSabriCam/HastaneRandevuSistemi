@@ -30,16 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="DAL">
       <HintPath>..\DAL\bin\Debug\DAL.dll</HintPath>
     </Reference>
-    <Reference Include="MappingLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MappingLayer">
       <HintPath>..\MappingLayer\bin\Debug\MappingLayer.dll</HintPath>
     </Reference>
-    <Reference Include="ModelLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ModelLayer">
       <HintPath>..\ModelLayer\bin\Debug\ModelLayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -57,6 +54,8 @@
     <Compile Include="BLLs\FavoriBLL.cs" />
     <Compile Include="BLLs\HastaneBLL.cs" />
     <Compile Include="BLLs\HastaneBolumBLL.cs" />
+    <Compile Include="BLLs\IlBLL.cs" />
+    <Compile Include="BLLs\IlceBLL.cs" />
     <Compile Include="BLLs\IzinBLL.cs" />
     <Compile Include="BLLs\KullaniciBLL.cs" />
     <Compile Include="BLLs\RandevuBLL.cs" />

@@ -13,10 +13,10 @@ namespace ModelLayer.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HastaneRandevuSistemiEntities : DbContext
+    public partial class HastaneRandevuSistemiEntities1 : DbContext
     {
-        public HastaneRandevuSistemiEntities()
-            : base("name=HastaneRandevuSistemiEntities")
+        public HastaneRandevuSistemiEntities1()
+            : base("name=HastaneRandevuSistemiEntities1")
         {
         }
     
@@ -29,13 +29,13 @@ namespace ModelLayer.Models
         public virtual DbSet<Doktor> Doktor { get; set; }
         public virtual DbSet<Favori> Favori { get; set; }
         public virtual DbSet<Hastane> Hastane { get; set; }
+        public virtual DbSet<HastaneBolum> HastaneBolum { get; set; }
         public virtual DbSet<Il> Il { get; set; }
         public virtual DbSet<Ilce> Ilce { get; set; }
         public virtual DbSet<Izin> Izin { get; set; }
         public virtual DbSet<Kullanici> Kullanici { get; set; }
         public virtual DbSet<KullaniciBilgileri> KullaniciBilgileri { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Randevu> Randevu { get; set; }
-        public virtual DbSet<HastaneBolum> HastaneBolum { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
     }
 }
