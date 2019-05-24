@@ -15,5 +15,9 @@ namespace ModelLayer.DTOs
         public Nullable<int> kullaniciID { get; set; }
         public string kullaniciAdi { get; set; }
         public string kullaniciSoyadi { get; set; }
+
+        public string hastaneAdi { get; set; }
+        public string bolumAd { get; set; }
+
     }
 }

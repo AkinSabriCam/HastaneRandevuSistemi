@@ -107,9 +107,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BolumController.cs" />
+    <Compile Include="Controllers\DoktorController.cs" />
+    <Compile Include="Controllers\FavorilerController.cs" />
+    <Compile Include="Controllers\HastaneBolumlerController.cs" />
     <Compile Include="Controllers\HastanelerController.cs" />
     <Compile Include="Controllers\IlceController.cs" />
     <Compile Include="Controllers\IlController.cs" />
+    <Compile Include="Controllers\IzinController.cs" />
+    <Compile Include="Controllers\KullanicilarController.cs" />
     <Compile Include="Controllers\RandevularController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

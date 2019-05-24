@@ -37,7 +37,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = favoriRepo.GetById(id, x => x.Doktor, x => x.Kullanici);
+                    var model = favoriRepo.GetById(x=>x.favoriID==id, x => x.Doktor, x => x.Kullanici);
 
                     return favoriMapper.Map(model);
                 }
@@ -54,7 +54,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = favoriRepo.GetByFilter(x => x.kullaniciID == id).ToList();
+                    var model = favoriRepo.GetByFilter(x => x.kullaniciID == id, x => x.Doktor,x => x.Kullanici.KullaniciBilgileri, x => x.Kullanici,x=>x.Doktor.Hastane,x=>x.Doktor.Bolum).ToList();
 
                     return favoriMapper.MapAll(model);
                 }

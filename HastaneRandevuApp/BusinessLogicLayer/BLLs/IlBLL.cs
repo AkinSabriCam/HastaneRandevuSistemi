@@ -36,7 +36,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = ilRepo.GetById(id,x=>x.Hastane,x=>x.KullaniciBilgileri);
+                    var model = ilRepo.GetById(x=>x.ilID==id,x=>x.Hastane,x=>x.KullaniciBilgileri);
                     return ilmapper.Map(model);
                 }
                 catch

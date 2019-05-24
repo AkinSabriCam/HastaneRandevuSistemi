@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f8e6b89a74bc49ecab6175a42a2fafad" Name="Diagram1">
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Bolum" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Doktor" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Favori" Width="1.5" PointX="15.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Hastane" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.HastaneBolum" Width="1.5" PointX="7.5" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Il" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Ilce" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Izin" Width="1.5" PointX="12.75" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Kullanici" Width="1.5" PointX="13.5" PointY="9.625" IsExpanded="true" />
+      <Diagram DiagramId="44b079f20f87409b9317da23f35e1790" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Bolum" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Doktor" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Favori" Width="1.5" PointX="12.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Hastane" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.HastaneBolum" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Il" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Ilce" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Izin" Width="1.5" PointX="12.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Kullanici" Width="1.5" PointX="10.5" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HastaneRandevuSistemiModel.KullaniciBilgileri" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Randevu" Width="1.5" PointX="15.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Rol" Width="1.5" PointX="11.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Randevu" Width="1.5" PointX="15.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneRandevuSistemiModel.Rol" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_Doktor_Bolum" ManuallyRouted="false" />
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_HastaneBolum_Bolum" ManuallyRouted="false" />
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_Doktor_Hastane" ManuallyRouted="false" />
@@ -30,8 +30,8 @@
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_Ilce_Il" ManuallyRouted="false" />
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_KullaniciBilgileri_Il" ManuallyRouted="false" />
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_KullaniciBilgileri_Ilce" ManuallyRouted="false" />
-        <AssociationConnector Association="HastaneRandevuSistemiModel.FK_Kullanici_KullaniciBilgileri" ManuallyRouted="false" />
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_Kullanici_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneRandevuSistemiModel.FK_KullaniciBilgileri_Kullanici" ManuallyRouted="false" />
         <AssociationConnector Association="HastaneRandevuSistemiModel.FK_Randevu_Kullanici" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

@@ -19,6 +19,8 @@ namespace ModelLayer.DTOs
         public string ilceAdi { get; set; }
         public string TCKN { get; set; }
         public string acikAdres { get; set; }
+        public string telNo { get; set; }
+        public string email { get; set; }
         public int rolID { get; set; }
         public string sifre { get; set; }
     }

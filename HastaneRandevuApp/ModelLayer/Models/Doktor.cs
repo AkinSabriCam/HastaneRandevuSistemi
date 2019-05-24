@@ -27,9 +27,9 @@ namespace ModelLayer.Models
         public string sifre { get; set; }
         public string adi { get; set; }
         public string soyadi { get; set; }
+        public string cepTelefonu { get; set; }
         public Nullable<int> hastaneID { get; set; }
         public Nullable<int> bolumID { get; set; }
-        public string cepTelefonu { get; set; }
     
         public virtual Bolum Bolum { get; set; }
         public virtual Hastane Hastane { get; set; }

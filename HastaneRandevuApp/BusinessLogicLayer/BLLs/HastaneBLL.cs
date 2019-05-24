@@ -33,7 +33,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {  
-                    var ent = hastaneRepo.GetById(id);
+                    var ent = hastaneRepo.GetById(x=>x.hastaneID==id,x=>x.Il,x=>x.Ilce, x => x.HastaneBolum, x => x.Doktor);
 
                    return  hastaneMapper.Map(ent);
                 }
@@ -51,7 +51,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = hastaneRepo.GetByFilter(x => x.ilceID == ilceId && x.ilID == ilId).ToList();
+                    var model = hastaneRepo.GetByFilter(x => x.ilceID == ilceId && x.ilID == ilId, x => x.HastaneBolum, x => x.Doktor, x => x.Il, x => x.Ilce).ToList();
 
                     return hastaneMapper.MapAll(model);
 
@@ -100,7 +100,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = hastaneRepo.GetById(id, x => x.Doktor, x => x.HastaneBolum, x => x.Il, x => x.Ilce);
+                    var model = hastaneRepo.GetById(x=>x.hastaneID==id, x => x.Doktor, x => x.HastaneBolum, x => x.Il, x => x.Ilce);
 
                     HastaneBolumBLL hastanebolBusiness = new HastaneBolumBLL();
                     hastanebolBusiness.DeleteByHastane(model.HastaneBolum.ToList());

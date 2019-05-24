@@ -21,15 +21,15 @@ namespace ModelLayer.Models
             this.Randevu = new HashSet<Randevu>();
         }
     
-        public int kullanicID { get; set; }
+        public int kullaniciID { get; set; }
         public string TCKN { get; set; }
         public string sifre { get; set; }
         public Nullable<int> rolID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favori> Favori { get; set; }
-        public virtual KullaniciBilgileri KullaniciBilgileri { get; set; }
         public virtual Rol Rol { get; set; }
+        public virtual KullaniciBilgileri KullaniciBilgileri { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Randevu> Randevu { get; set; }
     }

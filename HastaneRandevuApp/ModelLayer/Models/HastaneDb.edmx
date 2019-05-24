@@ -21,8 +21,8 @@
           <Property Name="sifre" Type="nvarchar" MaxLength="20" />
           <Property Name="adi" Type="nvarchar" MaxLength="20" />
           <Property Name="soyadi" Type="nvarchar" MaxLength="20" />
-          <Property Name="hastaneID" Type="int" />
           <Property Name="cepTelefonu" Type="nvarchar" MaxLength="11" />
+          <Property Name="hastaneID" Type="int" />
           <Property Name="bolumID" Type="int" />
         </EntityType>
         <EntityType Name="Favori">
@@ -41,7 +41,7 @@
           <Property Name="hastaneAdi" Type="nvarchar" MaxLength="50" />
           <Property Name="ilID" Type="int" />
           <Property Name="ilceID" Type="int" />
-          <Property Name="acikAdres" Type="nvarchar" MaxLength="100" />
+          <Property Name="acikAdres" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="HastaneBolum">
           <Key>
@@ -79,27 +79,27 @@
         </EntityType>
         <EntityType Name="Kullanici">
           <Key>
-            <PropertyRef Name="kullanicID" />
+            <PropertyRef Name="kullaniciID" />
           </Key>
-          <Property Name="kullanicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TCKN" Type="nvarchar" MaxLength="11" />
           <Property Name="sifre" Type="nvarchar" MaxLength="20" />
           <Property Name="rolID" Type="int" />
         </EntityType>
         <EntityType Name="KullaniciBilgileri">
           <Key>
-            <PropertyRef Name="kullaniID" />
+            <PropertyRef Name="kullaniciID" />
           </Key>
-          <Property Name="kullaniID" Type="int" Nullable="false" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
           <Property Name="adi" Type="nvarchar" MaxLength="20" />
           <Property Name="soyadi" Type="nvarchar" MaxLength="20" />
-          <Property Name="dogumTarihi" Type="datetime" />
-          <Property Name="cinsiyet" Type="bit" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="cepTelefonu" Type="nvarchar" MaxLength="11" />
-          <Property Name="email" Type="nvarchar" MaxLength="20" />
+          <Property Name="cinsiyet" Type="bit" />
+          <Property Name="dogumTarihi" Type="datetime" />
           <Property Name="ilID" Type="int" />
           <Property Name="ilceID" Type="int" />
-          <Property Name="acikAdres" Type="nvarchar" MaxLength="100" />
+          <Property Name="acikAdres" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Randevu">
           <Key>
@@ -160,7 +160,7 @@
           <End Role="Favori" Type="Self.Favori" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kullanici">
-              <PropertyRef Name="kullanicID" />
+              <PropertyRef Name="kullaniciID" />
             </Principal>
             <Dependent Role="Favori">
               <PropertyRef Name="kullaniciID" />
@@ -239,18 +239,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Kullanici_KullaniciBilgileri">
-          <End Role="KullaniciBilgileri" Type="Self.KullaniciBilgileri" Multiplicity="1" />
-          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="KullaniciBilgileri">
-              <PropertyRef Name="kullaniID" />
-            </Principal>
-            <Dependent Role="Kullanici">
-              <PropertyRef Name="kullanicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Kullanici_Rol">
           <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
@@ -287,6 +275,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KullaniciBilgileri_Kullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="KullaniciBilgileri" Type="Self.KullaniciBilgileri" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="kullaniciID" />
+            </Principal>
+            <Dependent Role="KullaniciBilgileri">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Randevu_Doktor">
           <End Role="Doktor" Type="Self.Doktor" Multiplicity="0..1" />
           <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
@@ -304,7 +304,7 @@
           <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kullanici">
-              <PropertyRef Name="kullanicID" />
+              <PropertyRef Name="kullaniciID" />
             </Principal>
             <Dependent Role="Randevu">
               <PropertyRef Name="kullaniciID" />
@@ -364,10 +364,6 @@
             <End Role="Doktor" EntitySet="Doktor" />
             <End Role="Izin" EntitySet="Izin" />
           </AssociationSet>
-          <AssociationSet Name="FK_Kullanici_KullaniciBilgileri" Association="Self.FK_Kullanici_KullaniciBilgileri">
-            <End Role="KullaniciBilgileri" EntitySet="KullaniciBilgileri" />
-            <End Role="Kullanici" EntitySet="Kullanici" />
-          </AssociationSet>
           <AssociationSet Name="FK_Kullanici_Rol" Association="Self.FK_Kullanici_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Kullanici" EntitySet="Kullanici" />
@@ -378,6 +374,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_KullaniciBilgileri_Ilce" Association="Self.FK_KullaniciBilgileri_Ilce">
             <End Role="Ilce" EntitySet="Ilce" />
+            <End Role="KullaniciBilgileri" EntitySet="KullaniciBilgileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciBilgileri_Kullanici" Association="Self.FK_KullaniciBilgileri_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
             <End Role="KullaniciBilgileri" EntitySet="KullaniciBilgileri" />
           </AssociationSet>
           <AssociationSet Name="FK_Randevu_Doktor" Association="Self.FK_Randevu_Doktor">
@@ -411,6 +411,7 @@
           <Property Name="sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="adi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="soyadi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cepTelefonu" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="hastaneID" Type="Int32" />
           <Property Name="bolumID" Type="Int32" />
           <NavigationProperty Name="Bolum" Relationship="Self.FK_Doktor_Bolum" FromRole="Doktor" ToRole="Bolum" />
@@ -418,7 +419,6 @@
           <NavigationProperty Name="Favori" Relationship="Self.FK_Favori_Doktor" FromRole="Doktor" ToRole="Favori" />
           <NavigationProperty Name="Izin" Relationship="Self.FK_Izin_Doktor" FromRole="Doktor" ToRole="Izin" />
           <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_Doktor" FromRole="Doktor" ToRole="Randevu" />
-          <Property Name="cepTelefonu" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Favori">
           <Key>
@@ -438,7 +438,7 @@
           <Property Name="hastaneAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ilID" Type="Int32" />
           <Property Name="ilceID" Type="Int32" />
-          <Property Name="acikAdres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="acikAdres" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Doktor" Relationship="Self.FK_Doktor_Hastane" FromRole="Hastane" ToRole="Doktor" />
           <NavigationProperty Name="Il" Relationship="Self.FK_Hastane_Il" FromRole="Hastane" ToRole="Il" />
           <NavigationProperty Name="Ilce" Relationship="Self.FK_Hastane_Ilce" FromRole="Hastane" ToRole="Ilce" />
@@ -489,34 +489,34 @@
         </EntityType>
         <EntityType Name="Kullanici">
           <Key>
-            <PropertyRef Name="kullanicID" />
+            <PropertyRef Name="kullaniciID" />
           </Key>
-          <Property Name="kullanicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TCKN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="rolID" Type="Int32" />
           <NavigationProperty Name="Favori" Relationship="Self.FK_Favori_Kullanici" FromRole="Kullanici" ToRole="Favori" />
-          <NavigationProperty Name="KullaniciBilgileri" Relationship="Self.FK_Kullanici_KullaniciBilgileri" FromRole="Kullanici" ToRole="KullaniciBilgileri" />
           <NavigationProperty Name="Rol" Relationship="Self.FK_Kullanici_Rol" FromRole="Kullanici" ToRole="Rol" />
+          <NavigationProperty Name="KullaniciBilgileri" Relationship="Self.FK_KullaniciBilgileri_Kullanici" FromRole="Kullanici" ToRole="KullaniciBilgileri" />
           <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_Kullanici" FromRole="Kullanici" ToRole="Randevu" />
         </EntityType>
         <EntityType Name="KullaniciBilgileri">
           <Key>
-            <PropertyRef Name="kullaniID" />
+            <PropertyRef Name="kullaniciID" />
           </Key>
-          <Property Name="kullaniID" Type="Int32" Nullable="false" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
           <Property Name="adi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="soyadi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="dogumTarihi" Type="DateTime" Precision="3" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cepTelefonu" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="cinsiyet" Type="Boolean" />
+          <Property Name="dogumTarihi" Type="DateTime" Precision="3" />
           <Property Name="ilID" Type="Int32" />
           <Property Name="ilceID" Type="Int32" />
-          <Property Name="acikAdres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="acikAdres" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Il" Relationship="Self.FK_KullaniciBilgileri_Il" FromRole="KullaniciBilgileri" ToRole="Il" />
           <NavigationProperty Name="Ilce" Relationship="Self.FK_KullaniciBilgileri_Ilce" FromRole="KullaniciBilgileri" ToRole="Ilce" />
-          <NavigationProperty Name="Kullanici" Relationship="Self.FK_Kullanici_KullaniciBilgileri" FromRole="KullaniciBilgileri" ToRole="Kullanici" />
-          <Property Name="cepTelefonu" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK_KullaniciBilgileri_Kullanici" FromRole="KullaniciBilgileri" ToRole="Kullanici" />
         </EntityType>
         <EntityType Name="Randevu">
           <Key>
@@ -616,7 +616,7 @@
           <End Role="Favori" Type="Self.Favori" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kullanici">
-              <PropertyRef Name="kullanicID" />
+              <PropertyRef Name="kullaniciID" />
             </Principal>
             <Dependent Role="Favori">
               <PropertyRef Name="kullaniciID" />
@@ -695,18 +695,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Kullanici_KullaniciBilgileri">
-          <End Role="KullaniciBilgileri" Type="Self.KullaniciBilgileri" Multiplicity="1" />
-          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="KullaniciBilgileri">
-              <PropertyRef Name="kullaniID" />
-            </Principal>
-            <Dependent Role="Kullanici">
-              <PropertyRef Name="kullanicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Kullanici_Rol">
           <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
@@ -719,19 +707,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KullaniciBilgileri_Kullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="KullaniciBilgileri" Type="Self.KullaniciBilgileri" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="kullaniciID" />
+            </Principal>
+            <Dependent Role="KullaniciBilgileri">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Randevu_Kullanici">
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
           <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kullanici">
-              <PropertyRef Name="kullanicID" />
+              <PropertyRef Name="kullaniciID" />
             </Principal>
             <Dependent Role="Randevu">
               <PropertyRef Name="kullaniciID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HastaneRandevuSistemiEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="HastaneRandevuSistemiEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bolum" EntityType="Self.Bolum" />
           <EntitySet Name="Doktor" EntityType="Self.Doktor" />
           <EntitySet Name="Favori" EntityType="Self.Favori" />
@@ -796,13 +796,13 @@
             <End Role="Ilce" EntitySet="Ilce" />
             <End Role="KullaniciBilgileri" EntitySet="KullaniciBilgileri" />
           </AssociationSet>
-          <AssociationSet Name="FK_Kullanici_KullaniciBilgileri" Association="Self.FK_Kullanici_KullaniciBilgileri">
-            <End Role="KullaniciBilgileri" EntitySet="KullaniciBilgileri" />
-            <End Role="Kullanici" EntitySet="Kullanici" />
-          </AssociationSet>
           <AssociationSet Name="FK_Kullanici_Rol" Association="Self.FK_Kullanici_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Kullanici" EntitySet="Kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciBilgileri_Kullanici" Association="Self.FK_KullaniciBilgileri_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="KullaniciBilgileri" EntitySet="KullaniciBilgileri" />
           </AssociationSet>
           <AssociationSet Name="FK_Randevu_Kullanici" Association="Self.FK_Randevu_Kullanici">
             <End Role="Kullanici" EntitySet="Kullanici" />
@@ -814,7 +814,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HastaneRandevuSistemiModelStoreContainer" CdmEntityContainer="HastaneRandevuSistemiEntities1">
+        <EntityContainerMapping StorageEntityContainer="HastaneRandevuSistemiModelStoreContainer" CdmEntityContainer="HastaneRandevuSistemiEntities">
           <EntitySetMapping Name="Bolum">
             <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.Bolum">
               <MappingFragment StoreEntitySet="Bolum">
@@ -826,12 +826,12 @@
           <EntitySetMapping Name="Doktor">
             <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.Doktor">
               <MappingFragment StoreEntitySet="Doktor">
-                <ScalarProperty Name="cepTelefonu" ColumnName="cepTelefonu" />
                 <ScalarProperty Name="doktorID" ColumnName="doktorID" />
                 <ScalarProperty Name="TCKN" ColumnName="TCKN" />
                 <ScalarProperty Name="sifre" ColumnName="sifre" />
                 <ScalarProperty Name="adi" ColumnName="adi" />
                 <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+                <ScalarProperty Name="cepTelefonu" ColumnName="cepTelefonu" />
                 <ScalarProperty Name="hastaneID" ColumnName="hastaneID" />
                 <ScalarProperty Name="bolumID" ColumnName="bolumID" />
               </MappingFragment>
@@ -898,7 +898,7 @@
           <EntitySetMapping Name="Kullanici">
             <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.Kullanici">
               <MappingFragment StoreEntitySet="Kullanici">
-                <ScalarProperty Name="kullanicID" ColumnName="kullanicID" />
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
                 <ScalarProperty Name="TCKN" ColumnName="TCKN" />
                 <ScalarProperty Name="sifre" ColumnName="sifre" />
                 <ScalarProperty Name="rolID" ColumnName="rolID" />
@@ -908,13 +908,13 @@
           <EntitySetMapping Name="KullaniciBilgileri">
             <EntityTypeMapping TypeName="HastaneRandevuSistemiModel.KullaniciBilgileri">
               <MappingFragment StoreEntitySet="KullaniciBilgileri">
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="cepTelefonu" ColumnName="cepTelefonu" />
-                <ScalarProperty Name="kullaniID" ColumnName="kullaniID" />
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
                 <ScalarProperty Name="adi" ColumnName="adi" />
                 <ScalarProperty Name="soyadi" ColumnName="soyadi" />
-                <ScalarProperty Name="dogumTarihi" ColumnName="dogumTarihi" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="cepTelefonu" ColumnName="cepTelefonu" />
                 <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+                <ScalarProperty Name="dogumTarihi" ColumnName="dogumTarihi" />
                 <ScalarProperty Name="ilID" ColumnName="ilID" />
                 <ScalarProperty Name="ilceID" ColumnName="ilceID" />
                 <ScalarProperty Name="acikAdres" ColumnName="acikAdres" />

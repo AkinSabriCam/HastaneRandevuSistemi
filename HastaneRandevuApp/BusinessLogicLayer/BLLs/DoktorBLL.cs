@@ -38,7 +38,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = doktorRepo.GetById(id, x => x.Bolum, x => x.Favori, x => x.Hastane, x => x.Randevu);
+                    var model = doktorRepo.GetById(x=>x.doktorID==id, x => x.Bolum, x => x.Favori, x => x.Hastane, x => x.Randevu);
 
                     return doktorMapper.Map(model);
                 }
@@ -70,7 +70,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = doktorRepo.GetByFilter(x => x.bolumID == bolumId && x.hastaneID==hastaneId).ToList();
+                    var model = doktorRepo.GetByFilter(x => x.bolumID == bolumId && x.hastaneID==hastaneId, x => x.Bolum, x => x.Favori, x => x.Hastane, x => x.Randevu).ToList();
 
                     return doktorMapper.MapAll(model);
                 }
@@ -118,7 +118,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = doktorRepo.GetById(id, x => x.Bolum, x => x.Hastane, x => x.Randevu, x => x.Favori);
+                    var model = doktorRepo.GetById(x=>x.doktorID==id, x => x.Bolum, x => x.Hastane, x => x.Randevu, x => x.Favori);
 
                     RandevuBLL randevuBusiness = new RandevuBLL();
 

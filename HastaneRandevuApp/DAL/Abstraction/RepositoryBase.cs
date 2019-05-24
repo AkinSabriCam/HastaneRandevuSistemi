@@ -91,20 +91,20 @@ namespace DAL.Abstraction
             }
         }
 
-        public TEntity GetById(int id, params Expression<Func<TEntity, object>>[] includes)
+        public TEntity GetById(Expression<Func<TEntity, bool>> id, params Expression<Func<TEntity, object>>[] includes)
         {
             using (DBContext db = new DBContext())
             {
                 try
                 {
-                    DbSet<TEntity> table = db.Set<TEntity>();
+                    IQueryable<TEntity> table = db.Set<TEntity>();
                     foreach (var inc in includes)
                     {
-                        table.Include(inc);
+                        table=table.Include(inc);
                         // burada sadece son değeri  include etmek gibi bir problem oluşabilir dikkat et!
                     }
-                    
-                    return table.Find(id);
+
+                    return table.Where(id).First();
                 }
                 catch
                 {

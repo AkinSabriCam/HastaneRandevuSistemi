@@ -13,10 +13,10 @@ namespace ModelLayer.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HastaneRandevuSistemiEntities1 : DbContext
+    public partial class HastaneRandevuSistemiEntities : DbContext
     {
-        public HastaneRandevuSistemiEntities1()
-            : base("name=HastaneRandevuSistemiEntities1")
+        public HastaneRandevuSistemiEntities()
+            : base("name=HastaneRandevuSistemiEntities")
         {
         }
     

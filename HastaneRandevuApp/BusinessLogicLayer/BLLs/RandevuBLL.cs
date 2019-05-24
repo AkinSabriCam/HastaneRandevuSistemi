@@ -20,7 +20,7 @@ namespace BusinessLogicLayer.BLLs
 
                 try
                 {
-                    var model = randevuRepo.Get(x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    var model = randevuRepo.Get(x => x.Doktor, x => x.Kullanici,x=>x.Kullanici.KullaniciBilgileri, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
                     return randevuMapper.MapAll(model);
                 }
                 catch
@@ -36,7 +36,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var ent = randevuRepo.GetById(id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
+                    var ent = randevuRepo.GetById(x=>x.randevuID==id, x => x.Doktor, x => x.Kullanici, x => x.Kullanici.KullaniciBilgileri, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
 
                     return randevuMapper.Map(ent);
                 }
@@ -55,10 +55,27 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.doktorID == id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    var model = randevuRepo.GetByFilter(x => x.doktorID == id && x.durum==true, x => x.Doktor, x => x.Kullanici,x=>x.Kullanici.KullaniciBilgileri ,x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
                     return randevuMapper.MapAll(model);
 
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public List<RandevuDTO> GetOldByDoktorId(int id)
+        {
+            using (RandevuRepository randevuRepo = new RandevuRepository())
+            {
+                try
+                {
+                    var model = randevuRepo.GetByFilter(x => x.doktorID == id && x.durum == false, x => x.Doktor, x => x.Kullanici, x => x.Kullanici.KullaniciBilgileri, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+
+
+                    return randevuMapper.MapAll(model);
                 }
                 catch
                 {
@@ -73,7 +90,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == id, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == id&& x.durum==true, x => x.Doktor,x => x.Kullanici,x => x.Kullanici.KullaniciBilgileri,x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
                    
                     return randevuMapper.MapAll(model);
@@ -90,7 +107,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == id && x.durum==false, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == id && x.durum==false, x => x.Doktor, x => x.Kullanici,x => x.Kullanici.KullaniciBilgileri, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
 
                     return randevuMapper.MapAll(model);
@@ -103,18 +120,16 @@ namespace BusinessLogicLayer.BLLs
         }
 
 
-        public List<RandevuDTO> GetForUser(DateTime tarih,int doktorId)
+        public List<RandevuDonusDTO> GetForUser(DateTime tarih,int doktorId,int kullaniciId)
         {
             using (RandevuRepository randevuRepo = new RandevuRepository())
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.doktorID == doktorId && x.tarih == tarih).ToList();
-                    if (model.Count < 19)
+                    var model = randevuRepo.GetByFilter(x => x.doktorID == doktorId && x.tarih == tarih && x.durum == true,x => x.Kullanici.KullaniciBilgileri, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    if (model.Count < 16)
                     {
-                        // bu tarihteki ilgili doktorun tüm randevularını döndü 
-
-                        return randevuMapper.MapAll(model);
+                          return randevuMapper.MapDonus(model);
                     }
                     else
                     {
@@ -133,8 +148,9 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetById(randevuId, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
+                    var model = randevuRepo.GetById(x=>x.randevuID==randevuId, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane);
                     model.durum = false;
+                    randevuRepo.Update(model);
                 }
                 catch
                 {
@@ -143,20 +159,22 @@ namespace BusinessLogicLayer.BLLs
             }
         }
 
-        public void Add(int kullaniciId,int doktorId,DateTime tarih,TimeSpan saat)
+        public bool Add(Randevu model)
         {
             using (RandevuRepository randevuRepo = new RandevuRepository())
             {
                 try
                 {
-                    var randevu = new Randevu();
-
-                    randevu.doktorID = doktorId;
-                    randevu.kullaniciID = kullaniciId;
-                    randevu.durum = true;
-                    randevu.tarih = tarih;
-                    randevu.saat = saat;
-                    randevuRepo.Add(randevu);
+                    if (CheckSameDate((int)model.kullaniciID, (DateTime)model.tarih, (TimeSpan)model.saat))
+                    {
+                        // hastanın aynı saatte başka bir doktordan randevusu yoksa  buraya girecektir
+                        randevuRepo.Add(model);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
 
                 }
                 catch
@@ -168,5 +186,52 @@ namespace BusinessLogicLayer.BLLs
 
         }
         
+        public bool CheckSameDoctor(int kullaniciId,int doktorId,DateTime tarih)
+        {
+            using (RandevuRepository randevuRepo= new RandevuRepository())
+            {
+                try
+                {
+                    var model=randevuRepo.GetByFilter(x => x.kullaniciID == kullaniciId && x.doktorID == doktorId && x.tarih == tarih, x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    if (model.Count == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+                
+            }
+        }
+        public bool CheckSameDate(int kullaniciId, DateTime tarih,TimeSpan saat)
+        {
+            using (RandevuRepository randevuRepo = new RandevuRepository())
+            {
+                try
+                {
+                    var model = randevuRepo.GetByFilter(x => x.kullaniciID == kullaniciId && x.tarih == tarih && x.saat == saat,x => x.Doktor, x => x.Kullanici, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    if (model.Count == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+
+            }
+        }
+
     }
 }

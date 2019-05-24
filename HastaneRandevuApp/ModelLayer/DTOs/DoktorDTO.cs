@@ -13,7 +13,7 @@ namespace ModelLayer.DTOs
         public string sifre { get; set; }
         public string adi { get; set; }
         public string soyadi { get; set; }
-
+        public string telNo { get; set; }
         public string hastaneAdi { get; set; }
         public string bolumAdi { get; set; }
 

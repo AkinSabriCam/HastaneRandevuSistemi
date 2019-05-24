@@ -20,7 +20,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = kullaniciRepo.Get(x => x.KullaniciBilgileri, x => x.Randevu, x => x.Rol, x => x.Favori).ToList();
+                    var model = kullaniciRepo.Get(x => x.KullaniciBilgileri,x => x.KullaniciBilgileri.Il,x=>x.KullaniciBilgileri.Ilce, x => x.Randevu, x => x.Rol, x => x.Favori).ToList();
 
                     return kullaniciMapper.MapAll(model);
                 }
@@ -36,7 +36,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = kullaniciRepo.GetById(id, x => x.KullaniciBilgileri, x => x.Randevu, x => x.Rol, x => x.Favori);
+                    var model = kullaniciRepo.GetById(x=>x.kullaniciID==id, x => x.KullaniciBilgileri, x => x.KullaniciBilgileri.Il, x => x.KullaniciBilgileri.Ilce, x => x.Randevu, x => x.Rol, x => x.Favori);
 
                     return kullaniciMapper.Map(model);
                 }
@@ -54,7 +54,7 @@ namespace BusinessLogicLayer.BLLs
                 {
                     var kullanici = new Kullanici();
                     kullanici.TCKN = model.TCKN;
-                    kullanici.kullanicID = model.kullaniID;
+                    kullanici.kullaniciID = model.kullaniID;
                     kullanici.rolID = model.rolID;
                     kullanici.sifre = model.sifre;
                     kullaniciRepo.Add(kullanici);
@@ -70,8 +70,10 @@ namespace BusinessLogicLayer.BLLs
                             kulBil.dogumTarihi = model.dogumTarihi;
                             kulBil.ilceID = model.ilceID;
                             kulBil.ilID = model.ilID;
-                            kulBil.kullaniID = kullanici.kullanicID;
+                            kulBil.kullaniciID = kullanici.kullaniciID;
                             kulBil.soyadi = model.soyadi;
+                            kulBil.cepTelefonu = model.telNo;
+                            kulBil.email = model.email;
                             kullaniciBilRepo.Add(kulBil);
                         }
                         catch
@@ -94,7 +96,7 @@ namespace BusinessLogicLayer.BLLs
                 {
                     var kullanici = new Kullanici();
                     kullanici.TCKN = model.TCKN;
-                    kullanici.kullanicID = model.kullaniID;
+                    kullanici.kullaniciID = model.kullaniID;
                     kullanici.rolID = model.rolID;
                     kullanici.sifre = model.sifre;
                     kullaniciRepo.Update(kullanici);
@@ -110,7 +112,7 @@ namespace BusinessLogicLayer.BLLs
                             kulBil.dogumTarihi = model.dogumTarihi;
                             kulBil.ilceID = model.ilceID;
                             kulBil.ilID = model.ilID;
-                            kulBil.kullaniID = kullanici.kullanicID;
+                            kulBil.kullaniciID = kullanici.kullaniciID;
                             kulBil.soyadi = model.soyadi;
                             kullaniciBilRepo.Update(kulBil);
                         }

@@ -43,7 +43,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var ent = bolumRepo.GetById(id);
+                    var ent = bolumRepo.GetById(x=>x.bolumID==id);
                     var bolum = new BolumDTO();
                     bolum.bolumAdi = ent.bolumAdi;
                     bolum.bolumID = ent.bolumID;
@@ -63,10 +63,12 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var bolum = bolumRepo.GetById(id, x => x.Doktor, x => x.HastaneBolum);
+                    var bolum = bolumRepo.GetById(x=>x.bolumID==id ,x => x.Doktor, x => x.HastaneBolum);
 
                     HastaneBolumBLL hasbolBusiness = new HastaneBolumBLL();
                     hasbolBusiness.DeleteByBolum(bolum.HastaneBolum.ToList());
+
+                    bolumRepo.Delete(id);
                 }
                 catch
                 {

@@ -25,6 +25,7 @@ namespace MappingLayer.Mappers
                 doktor.sifre = ent.sifre;
                 doktor.soyadi = ent.soyadi;
                 doktor.TCKN = ent.TCKN;
+                doktor.telNo = ent.cepTelefonu;
 
                 doktorlar.Add(doktor);
             }
@@ -41,6 +42,7 @@ namespace MappingLayer.Mappers
             doktor.hastaneID = ent.hastaneID;
             doktor.sifre = ent.sifre;
             doktor.soyadi = ent.soyadi;
+            doktor.telNo = ent.cepTelefonu;
             doktor.TCKN = ent.TCKN;
 
             return doktor;

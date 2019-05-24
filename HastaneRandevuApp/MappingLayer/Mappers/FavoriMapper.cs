@@ -23,6 +23,8 @@ namespace MappingLayer.Mappers
                 favori.kullaniciAdi = ent.Kullanici.KullaniciBilgileri.adi;
                 favori.kullaniciSoyadi = ent.Kullanici.KullaniciBilgileri.soyadi;
                 favori.kullaniciID = ent.kullaniciID;
+                favori.bolumAd = ent.Doktor.Bolum.bolumAdi;
+                favori.hastaneAdi = ent.Doktor.Hastane.hastaneAdi;
 
                 favoriler.Add(favori);
             }

@@ -24,7 +24,7 @@ namespace MappingLayer.Mappers
                 kullanici.ilceAdi = ent.KullaniciBilgileri.Ilce.ilceAdi;
                 kullanici.ilceID = ent.KullaniciBilgileri.ilceID;
                 kullanici.ilID = ent.KullaniciBilgileri.ilID;
-                kullanici.kullaniID = ent.kullanicID;
+                kullanici.kullaniID = ent.kullaniciID;
                 kullanici.soyadi = ent.KullaniciBilgileri.soyadi;
                 kullanici.rolID = (int)ent.rolID;
 
@@ -43,9 +43,11 @@ namespace MappingLayer.Mappers
             kullanici.ilceAdi = ent.KullaniciBilgileri.Ilce.ilceAdi;
             kullanici.ilceID = ent.KullaniciBilgileri.ilceID;
             kullanici.ilID = ent.KullaniciBilgileri.ilID;
-            kullanici.kullaniID = ent.kullanicID;
+            kullanici.kullaniID = ent.kullaniciID;
             kullanici.soyadi = ent.KullaniciBilgileri.soyadi;
             kullanici.rolID = (int)ent.rolID;
+            kullanici.email = ent.KullaniciBilgileri.email;
+            kullanici.telNo = ent.KullaniciBilgileri.cepTelefonu;
 
             return kullanici;
         }
