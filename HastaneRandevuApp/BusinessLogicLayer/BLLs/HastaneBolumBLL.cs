@@ -19,7 +19,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model= hasbolRepo.Get(x=>x.Bolum,x=>x.Hastane).ToList();
+                    var model= hasbolRepo.GetByFilter(x=>x.hastaneID==hastaneId,x=>x.Bolum,x=>x.Hastane).ToList();
 
                     return hasbolumMaper.MapAll(model);
                 }

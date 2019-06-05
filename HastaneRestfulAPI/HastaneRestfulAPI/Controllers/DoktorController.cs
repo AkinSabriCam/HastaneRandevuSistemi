@@ -17,6 +17,7 @@ namespace HastaneRestfulAPI.Controllers
             var model=doktorBusiness.Get();
             return Ok(model);
         }
+        [HttpGet]
         public IHttpActionResult GetById(int id)
         {
             DoktorBLL doktorBusiness = new DoktorBLL();
@@ -30,7 +31,7 @@ namespace HastaneRestfulAPI.Controllers
             var model = doktorBusiness.GetByBolumIdHastaneId(hastaneid,bolumid);
             return Ok(model);
         }
-
+        [HttpPost]
         public IHttpActionResult Add(Doktor model)
         {
             DoktorBLL doktorBusiness = new DoktorBLL();
@@ -44,12 +45,21 @@ namespace HastaneRestfulAPI.Controllers
             doktorBusiness.Update(model);
             return Ok();
         }
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             DoktorBLL doktorBusiness = new DoktorBLL();
             doktorBusiness.Delete(id);
             return Ok();
         }
+
+        public IHttpActionResult GetByTcknPassword(string tckn, string password)
+        {
+            DoktorBLL doktorBusiness = new DoktorBLL();
+            var model = doktorBusiness.GetByTcknPassword(tckn, password);
+            return Ok(model);
+        }
+
 
     }
 }

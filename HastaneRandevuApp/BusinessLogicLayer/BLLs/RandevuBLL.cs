@@ -55,7 +55,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.doktorID == id && x.durum==true, x => x.Doktor, x => x.Kullanici,x=>x.Kullanici.KullaniciBilgileri ,x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    var model = randevuRepo.GetByFilter(x => x.doktorID == id && x.durum==true&& x.kullaniciID!=1, x => x.Doktor, x => x.Kullanici,x=>x.Kullanici.KullaniciBilgileri ,x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
                     return randevuMapper.MapAll(model);
 
@@ -72,7 +72,7 @@ namespace BusinessLogicLayer.BLLs
             {
                 try
                 {
-                    var model = randevuRepo.GetByFilter(x => x.doktorID == id && x.durum == false, x => x.Doktor, x => x.Kullanici, x => x.Kullanici.KullaniciBilgileri, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
+                    var model = randevuRepo.GetByFilter(x => x.doktorID == id && x.durum == false && x.kullaniciID!=1, x => x.Doktor, x => x.Kullanici, x => x.Kullanici.KullaniciBilgileri, x => x.Doktor.Bolum, x => x.Doktor.Hastane).ToList();
 
 
                     return randevuMapper.MapAll(model);

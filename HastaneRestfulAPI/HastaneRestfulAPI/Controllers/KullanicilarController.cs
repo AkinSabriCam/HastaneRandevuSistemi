@@ -11,6 +11,7 @@ namespace HastaneRestfulAPI.Controllers
 {
     public class KullanicilarController : ApiController
     {
+        
         public IHttpActionResult Get()
         {
             KullaniciBLL kullaniciBusiness = new KullaniciBLL();
@@ -21,16 +22,31 @@ namespace HastaneRestfulAPI.Controllers
         public IHttpActionResult GetById(int id)
         {
             KullaniciBLL kullaniciBusiness = new KullaniciBLL();
-            var model = kullaniciBusiness.Get();
+            var model = kullaniciBusiness.GetById(id);
             return Ok(model);
         }
+
+        public IHttpActionResult GetByTcknPassword(string tckn,string password)
+        {
+            KullaniciBLL kullaniciBusiness = new KullaniciBLL();
+            var model =kullaniciBusiness.GetByTcknPassword(tckn,password);
+            return Ok(model);
+        }
+
+
         [HttpPost]
         public IHttpActionResult Add(KullaniciDTO model)
         {
             KullaniciBLL kullaniciBusiness = new KullaniciBLL();
             kullaniciBusiness.Add(model);
             return Ok();
-
+        }
+        [HttpPut]
+        public IHttpActionResult Update(KullaniciDTO model)
+        {
+            KullaniciBLL kullaniciBusiness = new KullaniciBLL();
+            kullaniciBusiness.Update(model);
+            return Ok();
         }
 
     }

@@ -48,6 +48,30 @@ namespace BusinessLogicLayer.BLLs
                 }
             }
         }
+        public DoktorDTO GetByTcknPassword(string tckn, string password)
+        {
+            using (DoktorRepository doktorRepo = new DoktorRepository())
+            {
+                try
+                {       // girilen tckn ve şifreyi kontrol ederek geri döndürür
+                    var model = doktorRepo.GetByFilter(x => x.TCKN == tckn && x.sifre == password, x => x.Bolum, x => x.Favori, x => x.Hastane, x => x.Randevu).ToList();
+                    if (model.Count > 0)
+                    {
+                        return doktorMapper.Map(model[0]);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+
         public List<DoktorDTO> GetByBolumId(int id)
         {
             using (DoktorRepository doktorRepo = new DoktorRepository())

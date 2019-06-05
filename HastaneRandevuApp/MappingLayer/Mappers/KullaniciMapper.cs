@@ -27,6 +27,11 @@ namespace MappingLayer.Mappers
                 kullanici.kullaniID = ent.kullaniciID;
                 kullanici.soyadi = ent.KullaniciBilgileri.soyadi;
                 kullanici.rolID = (int)ent.rolID;
+                kullanici.email = ent.KullaniciBilgileri.email;
+                kullanici.TCKN = ent.TCKN;
+                kullanici.sifre = ent.sifre;
+                kullanici.rol = ent.Rol.rolAdi;
+                kullanici.telNo = ent.KullaniciBilgileri.cepTelefonu;
 
                 kullanicilar.Add(kullanici);
             }
@@ -47,7 +52,11 @@ namespace MappingLayer.Mappers
             kullanici.soyadi = ent.KullaniciBilgileri.soyadi;
             kullanici.rolID = (int)ent.rolID;
             kullanici.email = ent.KullaniciBilgileri.email;
+            kullanici.TCKN = ent.TCKN;
+            kullanici.sifre = ent.sifre;
+            kullanici.rol = ent.Rol.rolAdi;
             kullanici.telNo = ent.KullaniciBilgileri.cepTelefonu;
+
 
             return kullanici;
         }

@@ -46,6 +46,53 @@ namespace BusinessLogicLayer.BLLs
                 }
             }
         }
+
+
+        public KullaniciDTO GetByTcknPassword(string tckn,string password)
+        {
+            using (KullaniciRepository kullaniciRepo = new KullaniciRepository())
+            {
+                try
+                {       // girilen tckn ve şifreyi kontrol ederek geri döndürür
+                    var model = kullaniciRepo.GetByFilter(x => x.TCKN == tckn && x.sifre == password, x => x.KullaniciBilgileri, x => x.KullaniciBilgileri.Il, x => x.KullaniciBilgileri.Ilce, x => x.Randevu, x => x.Rol, x => x.Favori).ToList();
+                    if(model.Count>0)
+                    {
+                        return kullaniciMapper.Map(model[0]);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public KullaniciDTO GetByTckn(string tckn)
+        {
+            using (KullaniciRepository kullaniciRepo = new KullaniciRepository())
+            {
+                try
+                {       // girilen tckn ve şifreyi kontrol ederek geri döndürür
+                    var model = kullaniciRepo.GetByFilter(x => x.TCKN == tckn,x => x.KullaniciBilgileri, x => x.KullaniciBilgileri.Il, x => x.KullaniciBilgileri.Ilce, x => x.Randevu, x => x.Rol, x => x.Favori).First();
+                    if (model != null)
+                    {
+                        return kullaniciMapper.Map(model);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
         public void Add(KullaniciDTO model)
         {
             using (KullaniciRepository kullaniciRepo = new KullaniciRepository())
@@ -114,6 +161,8 @@ namespace BusinessLogicLayer.BLLs
                             kulBil.ilID = model.ilID;
                             kulBil.kullaniciID = kullanici.kullaniciID;
                             kulBil.soyadi = model.soyadi;
+                            kulBil.cepTelefonu = model.telNo;
+                            kulBil.email = model.email;
                             kullaniciBilRepo.Update(kulBil);
                         }
                         catch
